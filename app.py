@@ -8,7 +8,9 @@ from datetime import date
 from werkzeug.security import check_password_hash, generate_password_hash
 from werkzeug.utils import secure_filename
 import sys
-
+from langchain.llms import Cohere
+from pathlib import Path
+from llama_index import download_loader
 
 import datetime
 
@@ -243,6 +245,10 @@ application.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
+
+
+
+# ...
 @app.route("/uploadpres", methods=['GET', 'POST'])
 @login_required
 def uploadpres():
@@ -257,18 +263,35 @@ def uploadpres():
             print('No file selected')
             return redirect(request.url)
         if file and allowed_file(file.filename):
-            filename = (str(id)+"."+"pdf")
+            filename = (str(id) + "." + "pdf")
             print(filename)
-        file.save(os.path.join(application.config['UPLOAD_FOLDER1'], filename))
+            file.save(os.path.join(application.config['UPLOAD_FOLDER1'], filename))
 
-        path = (os.path.join(application.config['UPLOAD_FOLDER1'], filename))
-        print("path :", path)
+            path = os.path.join(application.config['UPLOAD_FOLDER1'], filename)
+            print("path :", path)
+          
 
-        # file.save(os.path.join(application.config['UPLOAD_FOLDER2'], filename))
 
-        # path = (os.path.join(application.config['UPLOAD_FOLDER2'], filename))
-        # print("path :", path)
-            
+            return f"File uploaded successfully. Extracted medicines: "
+          
+
+    # If the request method is not POST or the file is not allowed, you should return something
     else:
-        return render_template("uploadpres.html")
-        
+        return render_template("uploadpres.html")  # You should return a response here
+
+    
+def solve(path_):       
+    PDFReader = download_loader("PDFReader")
+    loader = PDFReader()
+    documents = loader.load_data(file=Path(path_))
+    # print(documents[0].text)
+    inp = f"assume you are a doctor, consider the above text and suggest quick remedies for the health problems. strictly  only give the quick remedies to help. return each remedy in the form of a string in an array. The text is {documents[0].text}"
+    llm = Cohere(cohere_api_key="CHQMWlPJ17tL5pMdaeH65KswIPDGcVKfbjykUi5X", temperature=0.7)
+    print(llm.predict(inp))
+    
+@app.route("/llma")
+def llma():
+    # Forget any user_id
+    solve("static/prescription/1.pdf")
+    # Redirect user to login form
+    return redirect("/")
