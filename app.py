@@ -215,10 +215,60 @@ def checklist():
     id = session["user_id"]    
     return render_template("checklist.html")
 
+# @app.route("/uploadpres")
+# @login_required
+# def uploadpres():
+#     id = session["user_id"]    
+#     return render_template("uploadpres.html")
 
 
+if __name__ == "__main__":
+    app.debug = True
+    app.run(host='0.0.0.0')
+    
+    
+
+# file STORAGE
+UPLOAD_FOLDER1 = "static/prescription"
+UPLOAD_FOLDER2 = "static/report"
+ALLOWED_EXTENSIONS = {'pdf','PDF'}
+application = Flask(__name__, static_url_path="/static")
+DIR_PATH = os.path.dirname(os.path.realpath(__file__))
+application.config['UPLOAD_FOLDER1'] = UPLOAD_FOLDER1
+application.config['UPLOAD_FOLDER2'] = UPLOAD_FOLDER2
+# limit upload size upto 8mb
+application.config['MAX_CONTENT_LENGTH'] = 8 * 1024 * 1024
 
 
+def allowed_file(filename):
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-if __name__ == '__main__':
-    main()
+@app.route("/uploadpres", methods=['GET', 'POST'])
+@login_required
+def uploadpres():
+    id = db.execute("SELECT id FROM users WHERE id = ?",
+                          session["user_id"])[0]["id"]
+    if request.method == 'POST':
+        if 'file' not in request.files:
+            print('No file attached in request')
+            return redirect(request.url)
+        file = request.files['file']
+        if file.filename == '':
+            print('No file selected')
+            return redirect(request.url)
+        if file and allowed_file(file.filename):
+            filename = (str(id)+"."+"pdf")
+            print(filename)
+        file.save(os.path.join(application.config['UPLOAD_FOLDER1'], filename))
+
+        path = (os.path.join(application.config['UPLOAD_FOLDER1'], filename))
+        print("path :", path)
+
+        # file.save(os.path.join(application.config['UPLOAD_FOLDER2'], filename))
+
+        # path = (os.path.join(application.config['UPLOAD_FOLDER2'], filename))
+        # print("path :", path)
+            
+    else:
+        return render_template("uploadpres.html")
+        
