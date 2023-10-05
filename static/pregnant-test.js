@@ -4,6 +4,9 @@ clearAll = document.querySelector(".clear-btn"),
 taskBox = document.querySelector(".task-box");
 
 
+
+
+
 let editId;
 let isEditedTask = false;
 

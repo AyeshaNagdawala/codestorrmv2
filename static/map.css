@@ -108,59 +108,32 @@ ul {
   justify-content: end;
   gap: 40px;
 }
-
-.patient-area{
-  border-radius: 30px;
-  margin: 10px 20px 0px 20px;
-  flex-wrap: wrap;
-  margin-top: 10px;
-  justify-content: space-evenly;
-  /* margin-block: 30px; */
-  /* gap: 20px; */
-  background-color: #ffb3d8;
+/* Header */
+header {
+  padding: 50px var(--padding-inline-section) 0;
 }
-.patient-card {
-  padding:20px ;
-  flex-direction: column;
-  justify-content: space-between;
-  margin: 3rem;
+.header-section {
+  justify-content: center;
+  gap: 50px;
+}
+
+.heading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.map { 
+  height: 500px; 
+  margin-top: 30px; 
+  width: 90%; 
+  margin-left: 50px;
+}
+
+.custom-icon.seminar {
+  background-color: red;
+  color: white;
+  padding: 5px;
+  border-radius: 50%;
   text-align: center;
-  width: 280px;
-  height: 280px;
-  border-radius: 20px;
-  background-color: #F3EDEB;
-  background-size: cover;
-  transition: 0.2s ease-out;
-}
-.patient-card:hover {
-  border: solid #F8EBD6 0.2px;
-  box-shadow: 0 0 10px #940C4D;
-  transition: ease-in-out 0.5s;
-  height: 285px;
-  width: 285px;
-}
-/* .card-title{
-  font-family: 'Pacifico',cursive;
-} */
-.patient-card img{
-  padding-top: 20px;
-  padding-bottom: 30px;
-  width:150px;
- height: 150px;
-}
-.patient-text{
-  flex-direction: column;
-  margin: auto;
-}
-
-#check:checked ~ section{
-  margin-left: 250px;
-}
-.button-text {
-  font-size: 20px;
-  background-color: var(--accent-color) !important;
-}
-
-.button-text:hover {
-  background-color: var(--accent-color-dark) !important;
 }

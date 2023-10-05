@@ -272,7 +272,7 @@ def uploadpres():
           
 
 
-            return f"File uploaded successfully. Extracted medicines: "
+            return redirect("/llma")
           
 
     # If the request method is not POST or the file is not allowed, you should return something
@@ -287,11 +287,39 @@ def solve(path_):
     # print(documents[0].text)
     inp = f"assume you are a doctor, consider the above text and suggest quick remedies for the health problems. strictly  only give the quick remedies to help. return each remedy in the form of a string in an array. The text is {documents[0].text}"
     llm = Cohere(cohere_api_key="CHQMWlPJ17tL5pMdaeH65KswIPDGcVKfbjykUi5X", temperature=0.7)
-    print(llm.predict(inp))
-    
+    # print(llm.predict(inp))
+    return llm.predict(inp)
+
 @app.route("/llma")
 def llma():
-    # Forget any user_id
-    solve("static/prescription/1.pdf")
-    # Redirect user to login form
-    return redirect("/")
+
+    remedies=solve("static/prescription/1.pdf")
+    print(remedies)
+    return render_template("llma.html",remedies=remedies)
+
+@app.route("/babysize")
+def baby():
+
+    return render_template("babysize.html")
+
+@app.route("/childvaccine")
+def childvaccine():
+
+    return render_template("childvaccine.html")
+
+
+@app.route("/pregnant-test")
+def pregnanttest():
+
+    return render_template("pregnant-test.html")
+
+
+@app.route("/vaccine-child")
+def vaccinech():
+
+    return render_template("vaccine-child.html")
+@app.route("/emg")
+def emg():
+
+    return render_template("emg.html")
+

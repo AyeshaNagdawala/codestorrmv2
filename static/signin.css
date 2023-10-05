@@ -20,7 +20,7 @@
     display: flex;
     align-items: center; /*vertically center*/
     justify-content: center; /*horizontal center*/
-    background-color: #4070f4;
+    background-color: #ff50a4;
     column-gap: 30px;
 }
 
@@ -93,10 +93,10 @@ form{
 }
 .feild button{
     color: #FFF;
-    background-color: #0171d3;
+    background-color: #ff50a4;
 }
 .feild button:hover{
-    background-color: #016dc0;
+    background-color: #ff50a4;
 }
 
 .form-link{
@@ -109,7 +109,7 @@ form{
     color: #232836;
 }
 .form-link a{
-    color: #0171d3;
+    color: #ff50a4;
     text-decoration: none;
 }
 
@@ -143,13 +143,13 @@ form{
 a.facebook /*for changes in 'a' of facebook this way have to call ,as 'facebook' is in under ancar tag not in div*/{
     color: #fff;
     text-decoration: none;
-    background-color: #4267b2;
+    background-color: #f2499b;
 }
 a.facebook .facebook-icon{
     height: 28px;
     width: 28px;
     background-color: #FFF;
-    color: #4267b2;
+    color: #ff50a4;
     font-size: 20px;
     border-radius: 50%;
     align-items: center;
@@ -169,7 +169,7 @@ img.google-img{
     object-fit: cover;
 }
 .feild.google{
-    color: #0171d3;
+    color: #ff50a4;
     text-decoration: none;
 
 }
@@ -186,5 +186,22 @@ a.google span{
     .form{
         padding: 15px 10px;
     }
+    
+}
+.mb-3{
+    margin-top: 20px;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+ border: 2px solid #f2499b ;
+ 
+ color: #940C4D ;
+}
+select{
+    border: 0px solid #f2499b ;
+    color: #940C4D;
+}
+option{
+ border: 2px solid #f2499b ;
     
 }
