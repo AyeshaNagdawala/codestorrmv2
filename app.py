@@ -323,3 +323,8 @@ def emg():
 
     return render_template("emg.html")
 
+@app.route("/map")
+def map():
+
+    return render_template("map.html")
+
