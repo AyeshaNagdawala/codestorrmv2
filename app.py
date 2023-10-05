@@ -74,7 +74,6 @@ def login():
             return redirect('/login')
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
-
         return redirect("/dashboard")
 
     # User reached route via GET (as by clicking a link or via redirect)
@@ -144,63 +143,25 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/details1", methods=["GET", "POST"])
-@login_required
-def details1():
-    if request.method == "POST":
-        # id = session["user_id"]
-        # name = request.form.get("name")
-        # age = request.form.get("age")
-        # speciality = request.form.get("speciality")
-        # gender = request.form.get("gender")
-        # idlink = request.form.get("idlink")
-        # regno = request.form.get("regno")
-        # contact = request.form.get("contact")
 
-        # db.execute("INSERT INTO doctor (id, name, age, gender ,speciality,idlink, regno, contact) VALUES (?, ? ,? ,?, ?,?,?,?)",
-        #            id, name, age, gender, speciality, idlink, regno, contact)
-        return redirect("/drdashboard")
-    else:
-        return render_template("details1.html")
+# @app.route("/details3", methods=["GET", "POST"])
+# @login_required
+# def details3():
+#     if request.method == "POST":
+#         # id = session["user_id"]
+#         # name = request.form.get("name")
+#         # age = request.form.get("age")
+#         # speciality = request.form.get("speciality")
+#         # gender = request.form.get("gender")
+#         # idlink = request.form.get("idlink")
+#         # regno = request.form.get("regno")
+#         # contact = request.form.get("contact")
 
-
-@app.route("/details2", methods=["GET", "POST"])
-@login_required
-def details2():
-    if request.method == "POST":
-        # id = session["user_id"]
-        # name = request.form.get("name")
-        # age = request.form.get("age")
-        # speciality = request.form.get("speciality")
-        # gender = request.form.get("gender")
-        # idlink = request.form.get("idlink")
-        # regno = request.form.get("regno")
-        # contact = request.form.get("contact")
-
-        # db.execute("INSERT INTO doctor (id, name, age, gender ,speciality,idlink, regno, contact) VALUES (?, ? ,? ,?, ?,?,?,?)",
-        #            id, name, age, gender, speciality, idlink, regno, contact)
-        return redirect("/drdashboard")
-    else:
-        return render_template("details2.html")
-
-@app.route("/details3", methods=["GET", "POST"])
-@login_required
-def details3():
-    if request.method == "POST":
-        # id = session["user_id"]
-        # name = request.form.get("name")
-        # age = request.form.get("age")
-        # speciality = request.form.get("speciality")
-        # gender = request.form.get("gender")
-        # idlink = request.form.get("idlink")
-        # regno = request.form.get("regno")
-        # contact = request.form.get("contact")
-
-        # db.execute("INSERT INTO doctor (id, name, age, gender ,speciality,idlink, regno, contact) VALUES (?, ? ,? ,?, ?,?,?,?)",
-        #            id, name, age, gender, speciality, idlink, regno, contact)
-        return redirect("/drdashboard")
-    else:
-        return render_template("details3.html")
+#         # db.execute("INSERT INTO doctor (id, name, age, gender ,speciality,idlink, regno, contact) VALUES (?, ? ,? ,?, ?,?,?,?)",
+#         #            id, name, age, gender, speciality, idlink, regno, contact)
+#         return redirect("/drdashboard")
+#     else:
+#         return render_template("details3.html")
 
 
 
@@ -208,8 +169,10 @@ def details3():
 @app.route("/dashboard")
 @login_required
 def dashboard():
+    
     id = session["user_id"]    
-    return render_template("dashboard.html")
+    query = db.execute("SELECT * FROM details where id = ?", id)
+    return render_template("dashboard.html", list=query)
 
 @app.route("/checklist")
 @login_required
@@ -328,3 +291,77 @@ def map():
 
     return render_template("map.html")
 
+@app.route("/digi")
+def digi():
+
+    return render_template("digital.html")
+
+@app.route("/r2")
+def r2():
+
+    return render_template("r2.html")
+
+@app.route("/r1")
+def r1():
+
+    return render_template("r1.html")
+
+@app.route("/community")
+def community():
+
+    return render_template("community.html")
+
+@app.route("/details3", methods=["GET", "POST"])
+@login_required
+def details3():
+    if request.method == "POST":
+        id = session["user_id"]
+        name = request.form.get("name")
+        age = request.form.get("age")
+        
+
+        
+        contact = request.form.get("contact")
+
+        db.execute("INSERT INTO details (id, name, age ,contact) VALUES (?, ? ,?, ?)",
+                   id, name, age, contact)
+        return redirect("/dashboard")
+    else:
+        return render_template("details3.html")
+    
+
+@app.route("/details1", methods=["GET", "POST"])
+@login_required
+def details1():
+    if request.method == "POST":
+        id = session["user_id"]
+        name = request.form.get("name")
+        age = request.form.get("age")
+  
+      
+        
+        contact = request.form.get("contact")
+
+        db.execute("INSERT INTO details (id, name, age ,contact) VALUES (?, ? ,? , ?)",
+                   id, name, age, contact)
+        return redirect("/dashboard")
+    else:
+        return render_template("details1.html")
+    
+
+@app.route("/details2", methods=["GET", "POST"])
+@login_required
+def details2():
+    if request.method == "POST":
+        id = session["user_id"]
+        name = request.form.get("name")
+        age = request.form.get("age")
+       
+        
+        contact = request.form.get("contact")
+
+        db.execute("INSERT INTO details (id, name, age ,contact) VALUES (?, ? ,? ,?)",
+                   id, name, age, contact)
+        return redirect("/dashboard")
+    else:
+        return render_template("details2.html")

@@ -20,17 +20,28 @@
   </head>
   <body>
     <nav>
-      <div class="container flex main-nav">
-          <a href="#" class="company-logo img"><img src="static/logo final.png"  alt="company-logo"></a>
-          <div class="nav-links">
-              <ul class="flex">
-                  <li><a href="/aboutus"class="hover-link">About Us</a></li>
-                  <li><a href="/faq"class="hover-link secondary-button">FAQs</a></li>
-                  <li><a href="/patientdashboard"class="hover-link primary-button">Dashboard</a></li>
-                </ul>
+      <div class="main-nav flex">
+          <div class="logo-name flex" style="flex-direction: row;">
+          <div class="logo">
+              <a href="#" class="company-logo img"><img src="static/logo.png" alt="mommy-and-me-logo"></a>
           </div>
+          <div class="name">
+              <h2 class="name-name">Mommy & Me</h2>
+          </div>
+          </div>
+        <div class="nav-links">
+        <ul class="flex">
+          <li><a href="/"class="hover-link">Home</a></li>
+          <li><a href="/"class="hover-link">About Us</a></li>
+          <li><a href="/community"class="hover-link">Community</a></li>
+          <li><a href="lresources"class="hover-link">Resources</a></li>
+          <li><a href="/logout"class="hover-link secondary-button">Log out</a></li>
+          
+        </ul>
+        </div>
       </div>
     </nav>
+    
     <section class="wrapper">
       <h2 class="h2 mt-0 text-center jumbo">Upload Prescription</h2>
       <div class="container-fluid mt-5">
@@ -41,7 +52,7 @@
               <p><input type="file" id="imgInp" name="file" /></p>
 
               <!--  <input type="file" id="imgInp" name="file_source" aria-label="File browser example">-->
-              <!--<span class="file-custom"></span>-->
+               <!--<span class="file-custom"></span>-->
               <!--</label>-->
 
               <!-- <input type="file" id="imgInp" class="input-btn" name="file_source" size="40">-->
